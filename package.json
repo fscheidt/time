@@ -1,7 +1,7 @@
 {
 	"name": "time",
 	"description": "Timer and cronometer",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": {
 		"name": "Felippe Scheidt",
 		"email": "felippescheidt@gmail.com"
@@ -26,10 +26,13 @@
 	},
 	"devDependencies": {
 		"@fontsource-variable/instrument-sans": "^5.2.8",
+		"@internationalized/date": "^3.12.1",
+		"@lucide/svelte": "^1.14.0",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.2.2",
+		"bits-ui": "^2.18.1",
 		"clsx": "^2.1.1",
 		"remixicon-svelte": "^0.0.5",
 		"shadcn-svelte": "^1.2.7",

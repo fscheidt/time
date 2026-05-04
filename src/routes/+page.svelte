@@ -1,19 +1,20 @@
 <script>
-import Button from "$lib/components/ui/button/button.svelte";
-import TimeBox from "$lib/timer/TimeBox.svelte";
-let date = $state();
-function handleClick() {
-  date = new Date();
-}
+import { format } from "date-fns";
+import Countdown from "$lib/timer/Countdown.svelte";
+let currentTime = $state();
+let isRunning = $state(false);
+let pageTitle = $derived(isRunning ? 
+  format(currentTime,"HH:mm:ss")
+  : "Timer paused" )
 </script>
 
-<div class="flex flex-col w-24 gap-4 p-4">
-  
-  <h1>Timer</h1>
-  <Button 
-    variant="outline"
-    onclick={handleClick}>Now</Button>
-  
-  <TimeBox {date}/>
-  
+<svelte:head>
+	<title>{pageTitle}</title>
+</svelte:head>
+
+<div class="flex flex-col gap-4">
+  <Countdown
+    bind:currentTime
+    bind:isRunning
+  />
 </div>
