@@ -43,7 +43,7 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
     href={App.repo} 
     target="_blank"
     rel="noreferrer"
-    variant="outline" 
+    variant="ghost" 
     size="icon"
     class="h-8 shadow-none"
   >
