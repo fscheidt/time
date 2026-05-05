@@ -8,6 +8,7 @@ import MoonIcon from "@lucide/svelte/icons/moon";
 import { toggleMode } from "mode-watcher";
 import Button from '$lib/components/ui/button/button.svelte';
 let { children } = $props();
+import { cn } from '$lib/utils';
 </script>
 
 <svelte:head>
@@ -21,12 +22,14 @@ let { children } = $props();
 		<SunIcon class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all! dark:scale-0 dark:-rotate-90"/>
 		<MoonIcon	class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all! dark:scale-100 dark:rotate-0"/>
 	</Button>
-	<Button variant="outline">
-		<a href={`${base}/`}>timer</a>
-	</Button>
-	<Button variant="outline">
-		<a href={`${base}/now`}>now</a>
-	</Button>
+	
+	<a href={`${base}/`}
+		class={cn("hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none")}
+		>timer</a>
+	<a href={`${base}/now`}
+		class={cn("hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none")}
+		>now</a>
+
 </nav>
 
 {@render children()}
