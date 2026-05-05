@@ -1,1 +1,5 @@
-// place files you want to import through the `$lib` alias in this folder.
+export const App = {
+  version: __APP_VERSION__,
+  webpage: "https://fscheidt.github.io/time/",
+  repo: "https://github.com/fscheidt/time",
+}
