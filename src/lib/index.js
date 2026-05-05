@@ -3,3 +3,7 @@ export const App = {
   webpage: "https://fscheidt.github.io/time/",
   repo: "https://github.com/fscheidt/time",
 }
+export const configs = {
+  autostart: false,
+  minutes: 30,
+}

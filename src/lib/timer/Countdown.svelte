@@ -1,6 +1,6 @@
 <script>
 let {
-	minutes = 25,
+	minutes = $bindable(25),
 	autostart = $bindable(false),
 	isRunning = $bindable(false),
 	currentTime = $bindable(),
@@ -121,18 +121,18 @@ onMount(() => {
 		
 	</div>
 
-	<div class="flex flex-row w-60 justify-between">
+	<div class="flex flex-col w-60 gap-4">
 		<TimeBox
 			class="text-teal-500 text-xl"
 			fmt="HH:mm:ss"
 			bind:date={currentTime}
 		/>
+		<Progress 
+			class="h-2 rounded"
+			value={countSecs} 
+			max={totalSecs} />
 	</div>
 
-	<Progress 
-		class="h-2 w-[60%] rounded"
-		value={countSecs} 
-		max={totalSecs} />
 
 </div>
 

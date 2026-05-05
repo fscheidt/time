@@ -14,12 +14,10 @@ onMount(()=>handleClick())
 </svelte:head>
 
 <div class="flex flex-col w-24 gap-4 p-4">
-  
-  <Button 
-    variant="outline"
-    onclick={handleClick}>time</Button>
-  
   <TimeBox {date}/>
   <TimeBox {date} fmt="mm:ss"/>
   <TimeBox {date} fmt="dd/MM/y, E"/>
+  <Button 
+    variant="outline" class="h-9"
+    onclick={handleClick}>update</Button>
 </div>
