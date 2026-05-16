@@ -92,10 +92,14 @@ function decreaseDays() { days = days > 0 ? (days-1) : 0}
 .calendar {
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  min-height: 330px;
 }
 @media screen and (max-width: 640px) {
+  .calendar {
+    min-height: 280px;
+  }
   .container {
+    padding: 0;
     display: grid;
     grid-template-columns: max-content;
   }
