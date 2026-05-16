@@ -29,7 +29,9 @@ let timeDiff = $derived(invert
 function addDays() { days = days + 1 }
 function decreaseDays() { days = days > 0 ? (days-1) : 0}
 </script>
-
+<svelte:head>
+  <title>Calendar</title>
+</svelte:head>
 <div class="container">
   <div class="calendar">
     <div class="flex gap-1 w-50 justify-between items-center h-11">
