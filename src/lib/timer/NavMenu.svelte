@@ -22,11 +22,11 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
     class="h-8 shadow-none"
   >timer</Button>
   
-  <Button href={`${base}/dates`} 
+  <Button href={`${base}/calendar`} 
     size="sm"
     variant="outline"
     class="h-8 shadow-none"
-  >dates</Button>
+  >calendar</Button>
 
   <Button href={`${base}/now`} 
     size="sm"

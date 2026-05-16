@@ -1,7 +1,7 @@
 {
 	"name": "time",
 	"description": "Timer and cronometer",
-	"version": "0.1.5",
+	"version": "0.2.0",
 	"author": {
 		"name": "Felippe Scheidt",
 		"email": "felippescheidt@gmail.com"

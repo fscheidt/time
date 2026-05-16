@@ -24,7 +24,8 @@
 	const monthFormat = $derived.by(() => {
 		if (monthFormatProp) return monthFormatProp;
 		if (captionLayout.startsWith("dropdown")) return "short";
-		return "long";
+		// return "long";
+		return "short";
 	});
 </script>
 
@@ -73,7 +74,7 @@ get along, so we shut typescript up by casting `value` to `never`.
 							<Calendar.GridRow class="select-none">
 								{#each weekdays as weekday, i (i)}
 									<Calendar.HeadCell>
-										{weekday.slice(0, 2)}
+										{weekday.slice(0, 3)}
 									</Calendar.HeadCell>
 								{/each}
 							</Calendar.GridRow>
@@ -90,7 +91,8 @@ get along, so we shut typescript up by casting `value` to `never`.
 												})}
 											{:else}
 												<Calendar.Day />
-											{/if}
+												{/if}
+												<!-- <Calendar.Day /> -->
 										</Calendar.Cell>
 									{/each}
 								</Calendar.GridRow>
