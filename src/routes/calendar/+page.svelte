@@ -11,6 +11,7 @@ import Label from "$lib/components/ui/label/label.svelte";
 import Checkbox from "$lib/components/ui/checkbox/checkbox.svelte";
 import PlusIcon from "@lucide/svelte/icons/plus";
 import MinusIcon from "@lucide/svelte/icons/minus";
+    import { onMount } from 'svelte';
 
 let days = $state(7);
 let calendarDate = $state(toCalendar(new Date()));
@@ -28,10 +29,14 @@ let timeDiff = $derived(invert
 )
 function addDays() { days = days + 1 }
 function decreaseDays() { days = days > 0 ? (days-1) : 0}
+onMount(()=>{
+
+})
 </script>
 <svelte:head>
   <title>Calendar</title>
 </svelte:head>
+
 <div class="container">
   <div class="calendar">
     <div class="flex gap-1 w-50 justify-between items-center h-11">
@@ -92,7 +97,7 @@ function decreaseDays() { days = days > 0 ? (days-1) : 0}
 .calendar {
   display: flex;
   flex-direction: column;
-  min-height: 330px;
+  min-height: 400px;
 }
 @media screen and (max-width: 640px) {
   .calendar {

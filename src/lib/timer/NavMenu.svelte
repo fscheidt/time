@@ -33,9 +33,14 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
     variant="outline"
     class="h-8 shadow-none"
   >now</Button>
-  	
-	<Badge>{App.version}</Badge>
 
+  <Button href={`${base}/status`} 
+    size="sm"
+    variant="ghost"
+    class="h-8 shadow-none hover:hover:bg-muted/10 dark:hover:bg-muted/10"
+  >
+    <Badge>{App.version}</Badge>
+  </Button>	
   {#if base === ""}
     <Button 
       href={App.webpage} 
