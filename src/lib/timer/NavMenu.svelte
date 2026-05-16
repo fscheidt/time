@@ -21,6 +21,12 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
     variant="outline"
     class="h-8 shadow-none"
   >timer</Button>
+  
+  <Button href={`${base}/dates`} 
+    size="sm"
+    variant="outline"
+    class="h-8 shadow-none"
+  >dates</Button>
 
   <Button href={`${base}/now`} 
     size="sm"
