@@ -96,7 +96,7 @@ function decreaseDays() { days = days > 0 ? (days-1) : 0}
 }
 @media screen and (max-width: 640px) {
   .calendar {
-    min-height: 280px;
+    min-height: 380px;
   }
   .container {
     padding: 0;
