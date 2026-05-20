@@ -13,6 +13,8 @@ import { SvelteDate } from 'svelte/reactivity';
 import { getTime, sub, minutesToSeconds } from 'date-fns';
 import PlayIcon from '@lucide/svelte/icons/play';
 import StopIcon from '@lucide/svelte/icons/square';
+import PlusIcon from '@lucide/svelte/icons/plus';
+import MinusIcon from '@lucide/svelte/icons/minus';
 import ResetIcon from '@lucide/svelte/icons/timer-reset';
 import Button from "$lib/components/ui/button/button.svelte";
 import Input from "$lib/components/ui/input/input.svelte";
@@ -38,6 +40,12 @@ let startTime = $derived(getTime(
 function handleStop() {
 	isRunning = false;
 	if (interval) clearInterval(interval);
+}
+function handleDecrement() {
+	min-=5;
+}
+function handleIncrement() {
+	min+=5;
 }
 function handleInit() {
 	countSecs = 0;
@@ -106,7 +114,7 @@ onMount(() => {
 
 	<div class="flex flex-row items-center">
 		<Badge variant="ghost">min</Badge>
-		<div class="flex">
+		<div class="flex gap-2">
 			<Input 
 				class="w-18 rounded"
 				type="number"
@@ -117,6 +125,17 @@ onMount(() => {
 				oninput={handleDurationChange}
 				placeholder="minutes"
 				/>
+		<Button onclick={handleIncrement} 
+			variant="secondary"
+			disabled={isRunning}>
+			<PlusIcon/>
+		</Button>
+
+		<Button onclick={handleDecrement} 
+			variant="secondary"
+			disabled={isRunning}>
+			<MinusIcon/>
+		</Button>
 		</div>
 		
 	</div>
