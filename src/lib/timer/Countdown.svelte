@@ -42,7 +42,8 @@ function handleStop() {
 	if (interval) clearInterval(interval);
 }
 function handleDecrement() {
-	min-=5;
+	let tm = min - 5;
+	min = tm > 0 ? tm : min;
 }
 function handleIncrement() {
 	min+=5;
@@ -127,13 +128,13 @@ onMount(() => {
 				/>
 		<Button onclick={handleIncrement} 
 			variant="secondary"
-			disabled={isRunning}>
+			>
 			<PlusIcon/>
 		</Button>
 
 		<Button onclick={handleDecrement} 
 			variant="secondary"
-			disabled={isRunning}>
+			>
 			<MinusIcon/>
 		</Button>
 		</div>
