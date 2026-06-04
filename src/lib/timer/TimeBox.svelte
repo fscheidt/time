@@ -19,7 +19,7 @@ let dt = $derived( date != null ?
   {#if label}
     <Badge variant="ghost">{label}</Badge>
   {/if}
-  <div class={cn("time", className)}>{dt}</div>
+  <div class={cn("time text-primary", className)}>{dt}</div>
 </div>
 
 <style>

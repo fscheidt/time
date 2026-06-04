@@ -90,60 +90,55 @@ onMount(() => {
 })
 </script>
 
-<div class="flex flex-col p-4 gap-4">
+{#snippet timeset()}
+	<div class="flex flex-row items-center">		
+		<div class="flex gap-2">
+			<Input 
+				class="w-18 rounded bg-input/30 h-8"
+				type="number"
+				disabled={isRunning}
+				min="1" max="120"
+				bind:value={min}
+				oninput={handleDurationChange}/>
+		<Button 
+			onclick={handleIncrement} 
+			class="h-8"
+			variant="ghost">
+			<PlusIcon/>
+		</Button>
+		<Button 
+			class="h-8"
+			onclick={handleDecrement} 
+			variant="ghost">
+			<MinusIcon/>
+		</Button>
+		</div>
+	</div>
+{/snippet}
 
+{#snippet player()}
 	<div class="flex flex-row gap-2 items-center">
-		
 		<Button onclick={handleStart} 
 			variant="secondary"
 			disabled={isRunning}>
 			<PlayIcon/>
 		</Button>
-		
 		<Button onclick={handleStop} 
 			variant="secondary"
 			disabled={!isRunning}>
 			<StopIcon/>
 		</Button>
-
 		<Button onclick={handleReset}
-			variant="secondary"
-			>
+			variant="secondary">
 			<ResetIcon/>
 		</Button>		
 	</div>
+{/snippet}
 
-	<div class="flex flex-row items-center">
-		<Badge variant="ghost">min</Badge>
-		<div class="flex gap-2">
-			<Input 
-				class="w-18 rounded"
-				type="number"
-				disabled={isRunning}
-				min="1"
-				max="120"
-				bind:value={min}
-				oninput={handleDurationChange}
-				placeholder="minutes"
-				/>
-		<Button onclick={handleIncrement} 
-			variant="secondary"
-			>
-			<PlusIcon/>
-		</Button>
-
-		<Button onclick={handleDecrement} 
-			variant="secondary"
-			>
-			<MinusIcon/>
-		</Button>
-		</div>
-		
-	</div>
-
+{#snippet countdown()}
 	<div class="flex flex-col w-60 gap-4">
 		<TimeBox
-			class="text-teal-500 text-xl"
+			class="text-accent text-xl"
 			fmt="HH:mm:ss"
 			bind:date={currentTime}
 		/>
@@ -152,7 +147,13 @@ onMount(() => {
 			value={countSecs} 
 			max={totalSecs} />
 	</div>
+{/snippet}
 
+<div class="flex flex-col p-4 gap-4">
+
+	{@render timeset()}
+	{@render player()}
+	{@render countdown()}
 
 </div>
 

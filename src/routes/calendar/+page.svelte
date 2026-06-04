@@ -11,7 +11,7 @@ import Label from "$lib/components/ui/label/label.svelte";
 import Checkbox from "$lib/components/ui/checkbox/checkbox.svelte";
 import PlusIcon from "@lucide/svelte/icons/plus";
 import MinusIcon from "@lucide/svelte/icons/minus";
-    import { onMount } from 'svelte';
+import { onMount } from 'svelte';
 
 let days = $state(7);
 let calendarDate = $state(toCalendar(new Date()));
@@ -44,7 +44,7 @@ onMount(()=>{
       <Checkbox bind:checked={invert} title="invert"/>
       <Input 
         bind:value={days} 
-        class="w-16" 
+        class="w-16 bg-input/30 h-7" 
         type="number"
         min="0"
         max="720"
