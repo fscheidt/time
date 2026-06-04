@@ -18,6 +18,7 @@ onMount(()=>handleClick())
   <TimeBox {date} fmt="mm:ss"/>
   <TimeBox {date} fmt="dd/MM/y, E"/>
   <Button 
-    variant="outline" class="h-9"
+    variant="outline" 
+    class="h-9"
     onclick={handleClick}>update</Button>
 </div>
