@@ -12,13 +12,14 @@ let device = $state(status.device);
   <title>Status</title>
 </svelte:head>
 
+{#snippet json(item)}
+  <div class="flex flex-col gap-1 m-2">
+    <h2>{item?.title}</h2>
+    <pre>{JSON.stringify(item.data, null, 2)}</pre>
+  </div>
+{/snippet}
+
 <div class="status p-2">
-  <div class="flex flex-col gap-1 m-2">
-    <h2>device</h2>
-    <pre>{JSON.stringify(device, null, 2)}</pre>
-  </div>
-  <div class="flex flex-col gap-1 m-2">
-    <h2>app</h2>
-    <pre>{JSON.stringify(status.app, null, 2)}</pre>
-  </div>
+  {@render json({ title:"device", data: device })}
+  {@render json({ title:"app", data: status.app })}  
 </div>
