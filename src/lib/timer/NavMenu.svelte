@@ -28,13 +28,7 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
     class="h-8 shadow-none"
   >calendar</Button>
 
-  <Button href={`${base}/now`} 
-    size="sm"
-    variant="outline"
-    class="h-8 shadow-none"
-  >now</Button>
-
-  <Button href={`${base}/status`} 
+<Button href={`${base}/status`} 
     size="sm"
     variant="ghost"
     class="h-8 shadow-none hover:hover:bg-muted/10 dark:hover:bg-muted/10"

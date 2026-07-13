@@ -2,5 +2,7 @@
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
-	"editor.lineHeight": 1.7
+	"editor.lineHeight": 1.8,
+	"editor.fontFamily": "Overpass Mono",
+	"editor.fontSize": 18
 }

@@ -1,7 +1,7 @@
 <script>
 let {
-	minutes = $bindable(25),
-	autostart = $bindable(false),
+	minutes = $bindable(1),
+	autostart = $bindable(true),
 	isRunning = $bindable(false),
 	currentTime = $bindable(),
 	onStartEvent = () => {},
@@ -10,7 +10,7 @@ let {
 } = $props();
 import { onMount } from 'svelte';
 import { SvelteDate } from 'svelte/reactivity';
-import { getTime, sub, minutesToSeconds } from 'date-fns';
+import * as dfn from 'date-fns';
 import PlayIcon from '@lucide/svelte/icons/play';
 import StopIcon from '@lucide/svelte/icons/square';
 import PlusIcon from '@lucide/svelte/icons/plus';
@@ -21,24 +21,28 @@ import Input from "$lib/components/ui/input/input.svelte";
 import Badge from '$lib/components/ui/badge/badge.svelte';
 import Progress from '$lib/components/ui/progress/progress.svelte';
 import TimeBox from './TimeBox.svelte';
+    import Label from '$lib/components/ui/label/label.svelte';
 
 const pad = (n) => n.toString().padStart(2, '0');
 
 const timeout = 1000;
 let interval = null;
+let startHour = $state(null);
+let endHour = $state(null);
 
 // svelte-ignore state_referenced_locally
 let min = $state(minutes);
-const totalSecs = $derived(	minutesToSeconds(min) );
+const totalSecs = $derived(	dfn.minutesToSeconds(min) );
 let countSecs = $state(0);
 
-let startTime = $derived(getTime(
-  new Date(2026, 0, 1, 0, min, 0)	
-));
+let startTime = $derived(
+	dfn.getTime( new Date(2026, 0, 1, 0, min, 0)	)
+);
 // let currentTime = $state();
 
 function handleStop() {
 	isRunning = false;
+	endHour = new Date(); 
 	if (interval) clearInterval(interval);
 }
 function handleDecrement() {
@@ -46,12 +50,13 @@ function handleDecrement() {
 	min = tm > 0 ? tm : min;
 }
 function handleIncrement() {
-	min+=5;
+	min += 5;
 }
 function handleInit() {
 	countSecs = 0;
 	isRunning = false;
-	currentTime = sub(startTime, { seconds: countSecs });
+	currentTime = dfn.sub(startTime, { seconds: countSecs });
+	startHour = new Date(); 
 }
 function handleComplete() {
 	handleStop();
@@ -61,11 +66,9 @@ function handleStart() {
 	handleInit();
 	isRunning = true;
 	interval = setInterval(() => {		
-		currentTime = sub(startTime, { seconds: countSecs+1 });
+		currentTime = dfn.sub(startTime, { seconds: countSecs+1 });
 		countSecs++;
-		if(countSecs >= totalSecs) {
-			handleComplete();
-		}
+		if(countSecs >= totalSecs) { handleComplete() }
 		onUpdateEvent(currentTime);
 	}, timeout);
 }
@@ -91,25 +94,29 @@ onMount(() => {
 </script>
 
 {#snippet timeset()}
-	<div class="flex flex-row items-center">		
-		<div class="flex gap-2">
+	<div class="flex flex-row items-center gap-2">		
+		<div class="flex gap-3">
+			<Label class="text-black dark:text-white text-lg p-1 w-8">{min}</Label>
 			<Input 
-				class="w-18 rounded bg-input/30 h-8"
+				class="w-18 rounded bg-input/30 h-8 hidden"
 				type="number"
 				disabled={isRunning}
-				min="1" max="120"
+				min="1" 
+				max="120"
 				bind:value={min}
-				oninput={handleDurationChange}/>
+				oninput={handleDurationChange} 
+				/>
 		<Button 
 			onclick={handleIncrement} 
 			class="h-8"
-			variant="ghost">
+			variant="secondary"
+			>
 			<PlusIcon/>
 		</Button>
 		<Button 
 			class="h-8"
 			onclick={handleDecrement} 
-			variant="ghost">
+			variant="secondary">
 			<MinusIcon/>
 		</Button>
 		</div>
@@ -118,17 +125,23 @@ onMount(() => {
 
 {#snippet player()}
 	<div class="flex flex-row gap-2 items-center">
-		<Button onclick={handleStart} 
+		<Button 
+			onclick={handleStart} 
 			variant="secondary"
+			class="drop-shadow-md/50 hover:bg-accent/50 disabled:text-secondary-foreground"
 			disabled={isRunning}>
 			<PlayIcon/>
 		</Button>
-		<Button onclick={handleStop} 
+		<Button 
+			onclick={handleStop} 
+			class="drop-shadow-md/50 hover:bg-accent/50 disabled:text-secondary-foreground"
 			variant="secondary"
 			disabled={!isRunning}>
 			<StopIcon/>
 		</Button>
-		<Button onclick={handleReset}
+		<Button 
+			onclick={handleReset}
+			class="drop-shadow-md/50 hover:bg-accent/50 disabled:text-secondary-foreground"
 			variant="secondary">
 			<ResetIcon/>
 		</Button>		
@@ -138,7 +151,7 @@ onMount(() => {
 {#snippet countdown()}
 	<div class="flex flex-col w-60 gap-4">
 		<TimeBox
-			class="text-accent text-xl"
+			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
 			fmt="HH:mm:ss"
 			bind:date={currentTime}
 		/>
@@ -149,11 +162,35 @@ onMount(() => {
 	</div>
 {/snippet}
 
+{#snippet timeit()}
+	<div class="flex gap-2 text-secondary-foreground/50">
+		{#if startHour}
+			<div class="w-10">start</div>
+			<TimeBox
+				class="text-secondary-foreground/50 text-md"
+				fmt="HH:mm:ss"
+				bind:date={startHour}
+			/>
+		{/if}
+	</div>
+	<div class="flex gap-2 text-secondary-foreground/50">
+		{#if endHour}
+			<div class="w-10">end</div>
+			<TimeBox
+				class="text-md text-secondary-foreground/50"
+				fmt="HH:mm:ss"
+				bind:date={endHour}
+			/>
+		{/if}
+	</div>
+{/snippet}
+
 <div class="flex flex-col p-4 gap-4">
 
 	{@render timeset()}
 	{@render player()}
 	{@render countdown()}
+	{@render timeit()}
 
 </div>
 

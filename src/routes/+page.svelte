@@ -6,9 +6,10 @@ let autostart = $state(configs.autostart);
 let minutes = $state(configs.minutes);
 let currentTime = $state();
 let isRunning = $state(false);
-let pageTitle = $derived(isRunning ? 
-  format(currentTime,"HH:mm:ss")
-  : "Timer" )
+let pageTitle = $derived(isRunning 
+  ? format(currentTime,"HH:mm:ss")
+  : "Timer" 
+  )
 </script>
 
 <svelte:head>
