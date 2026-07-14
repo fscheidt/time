@@ -22,6 +22,7 @@ import Badge from '$lib/components/ui/badge/badge.svelte';
 import Progress from '$lib/components/ui/progress/progress.svelte';
 import TimeBox from './TimeBox.svelte';
     import Label from '$lib/components/ui/label/label.svelte';
+    import Transition from './Transition.svelte';
 
 const pad = (n) => n.toString().padStart(2, '0');
 
@@ -149,6 +150,7 @@ onMount(() => {
 {/snippet}
 
 {#snippet countdown()}
+<Transition bind:isRunning>
 	<div class="flex flex-col w-60 gap-4">
 		<TimeBox
 			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
@@ -160,6 +162,7 @@ onMount(() => {
 			value={countSecs} 
 			max={totalSecs} />
 	</div>
+</Transition>
 {/snippet}
 
 {#snippet timeit()}
