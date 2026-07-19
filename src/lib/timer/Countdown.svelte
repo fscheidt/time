@@ -150,7 +150,6 @@ onMount(() => {
 {/snippet}
 
 {#snippet countdown()}
-<Transition bind:isRunning>
 	<div class="flex flex-col w-60 gap-4">
 		<TimeBox
 			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
@@ -162,7 +161,22 @@ onMount(() => {
 			value={countSecs} 
 			max={totalSecs} />
 	</div>
-</Transition>
+{/snippet}
+
+{#snippet countdownFlick()}
+	<Transition bind:isRunning>
+	<div class="flex flex-col w-60 gap-4">
+		<TimeBox
+			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
+			fmt="HH:mm:ss"
+			bind:date={currentTime}
+		/>
+		<Progress 
+			class="h-2 rounded"
+			value={countSecs} 
+			max={totalSecs} />
+	</div>
+	</Transition>
 {/snippet}
 
 {#snippet timeit()}
@@ -192,7 +206,8 @@ onMount(() => {
 
 	{@render timeset()}
 	{@render player()}
-	{@render countdown()}
+	<!-- {@render countdown()} -->
+	{@render countdownFlick()}
 	{@render timeit()}
 
 </div>

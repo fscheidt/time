@@ -1,17 +1,19 @@
 <script>
 import { onMount } from "svelte";
+import { cn } from "$lib/utils";
 let {
   isRunning = $bindable(false),
   children,
+  class: className,
 } = $props();
 
 const colors = [
-  '#863335', // Coral red
-  '#8a4446', // Coral red
-  '#677d44', // Grass green
-  '#1f4c69', // Sky blue
-  '#6a4c93', // Royal purple
-  '#cba336'  // Soft cream
+  'oklch(1 1 1 / 0)',  // invisible
+  'oklch(0.73 0.13 87.88)',  // Soft cream
+  'oklch(0.56 0.14 301.44)', // Royal purple
+  'oklch(0.56 0.07 238.29)', // Sky blue
+  'oklch(0.74 0.12 126.37)', // Grass green
+  'oklab(0.63 0.1 0.03)', // Coral red
 ];
 
 let interval = null;
@@ -29,33 +31,31 @@ function handleStop() {
   if (interval) clearInterval(interval)
 }
 function handleStart() {
-	if (isRunning) return;
-	// handleInit();
-	isRunning = true;
+  if (interval) return;
 	interval = setInterval(() => {		
 		flickColor();
 	}, 2000);
 }
 $effect(() => {
+  if (isRunning) { handleStart(); }
+  else { handleStop(); }
 	return () => { 
-		if (interval) clearInterval(interval) 
+		if (interval) clearInterval(interval) ;
 	}
 });
 onMount(() => {
-  handleStart();
 })
 </script>
 
-<main class="container" 
+<div class={cn(className, "container")} 
   style="background-color: {colors[currentColorIndex]}">
   {@render children?.()}
-</main>
+</div>
 
 <style>
 .container {
   display: flex;
-  border-radius: 5px;
-  padding: 2rem;
-  transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: background-color 5.0s 
+  cubic-bezier(0.1, 0.1, 0.5, 0.1);
 }
 </style>
