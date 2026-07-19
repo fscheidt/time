@@ -8,12 +8,9 @@ let {
 } = $props();
 
 const colors = [
-  'oklch(1 1 1 / 0)',  // invisible
-  'oklch(0.63 0.13 87.88)',  // Soft cream
-  'oklch(0.56 0.14 301.44)', // Royal purple
-  'oklch(0.56 0.07 238.29)', // Sky blue
-  'oklch(0.74 0.12 126.37)', // Grass green
-  'oklab(0.63 0.1 0.03)', // Coral red
+  'oklch(0 0 0)',  // invisible
+  'oklch(0.36 0.14 301.44)', // Royal purple
+  'oklch(0.36 0.07 238.29)', // Sky blue
 ];
 
 let interval = null;
@@ -55,7 +52,7 @@ onMount(() => {
 
 <style>
 #container {
-  transition: background-color 1.0s 
-  cubic-bezier(0.1, 0.1, 0.5, 5);
+  transition: background-color 2.0s 
+  cubic-bezier(0.1, 0.2, 1, 2);
 }
 </style>
