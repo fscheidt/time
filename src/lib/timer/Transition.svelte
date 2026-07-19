@@ -2,14 +2,14 @@
 import { onMount } from "svelte";
 import { cn } from "$lib/utils";
 let {
-  isRunning = $bindable(false),
+  isRunning = $bindable(true),
   children,
   class: className,
 } = $props();
 
 const colors = [
   'oklch(1 1 1 / 0)',  // invisible
-  'oklch(0.73 0.13 87.88)',  // Soft cream
+  'oklch(0.63 0.13 87.88)',  // Soft cream
   'oklch(0.56 0.14 301.44)', // Royal purple
   'oklch(0.56 0.07 238.29)', // Sky blue
   'oklch(0.74 0.12 126.37)', // Grass green
@@ -47,7 +47,7 @@ onMount(() => {
 })
 </script>
 
-<div class={cn(className, "container")} 
+<div class={cn("container", className)} 
   style="background-color: {colors[currentColorIndex]}">
   {@render children?.()}
 </div>
@@ -55,7 +55,7 @@ onMount(() => {
 <style>
 .container {
   display: flex;
-  transition: background-color 5.0s 
-  cubic-bezier(0.1, 0.1, 0.5, 0.1);
+  transition: background-color 1.0s 
+  cubic-bezier(0.1, 0.1, 0.5, 5);
 }
 </style>

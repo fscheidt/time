@@ -17,7 +17,7 @@ let pageTitle = $derived(isRunning
 	<title>{pageTitle}</title>
 </svelte:head>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col w-fit">
 
   <Countdown
     bind:autostart

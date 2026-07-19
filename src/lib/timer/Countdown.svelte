@@ -23,6 +23,7 @@ import Progress from '$lib/components/ui/progress/progress.svelte';
 import TimeBox from './TimeBox.svelte';
     import Label from '$lib/components/ui/label/label.svelte';
     import Transition from './Transition.svelte';
+    import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
 
 const pad = (n) => n.toString().padStart(2, '0');
 
@@ -35,6 +36,8 @@ let endHour = $state(null);
 let min = $state(minutes);
 const totalSecs = $derived(	dfn.minutesToSeconds(min) );
 let countSecs = $state(0);
+
+let bezier = $state(false);
 
 let startTime = $derived(
 	dfn.getTime( new Date(2026, 0, 1, 0, min, 0)	)
@@ -125,7 +128,7 @@ onMount(() => {
 {/snippet}
 
 {#snippet player()}
-	<div class="flex flex-row gap-2 items-center">
+	<div class="flex flex-row gap-4 items-center">
 		<Button 
 			onclick={handleStart} 
 			variant="secondary"
@@ -145,7 +148,8 @@ onMount(() => {
 			class="drop-shadow-md/50 hover:bg-accent/50 disabled:text-secondary-foreground"
 			variant="secondary">
 			<ResetIcon/>
-		</Button>		
+		</Button>	
+		<Checkbox bind:checked={bezier}></Checkbox>	
 	</div>
 {/snippet}
 
@@ -164,18 +168,18 @@ onMount(() => {
 {/snippet}
 
 {#snippet countdownFlick()}
-	<Transition bind:isRunning>
-	<div class="flex flex-col w-60 gap-4">
-		<TimeBox
-			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
-			fmt="HH:mm:ss"
-			bind:date={currentTime}
-		/>
-		<Progress 
-			class="h-2 rounded"
-			value={countSecs} 
-			max={totalSecs} />
-	</div>
+	<Transition class="p-4 w-fit" bind:isRunning>
+		<div class="flex flex-col w-60 gap-4">
+			<TimeBox
+				class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
+				fmt="HH:mm:ss"
+				bind:date={currentTime}
+			/>
+			<Progress 
+				class="h-2 rounded"
+				value={countSecs} 
+				max={totalSecs} />
+		</div>
 	</Transition>
 {/snippet}
 
@@ -206,8 +210,11 @@ onMount(() => {
 
 	{@render timeset()}
 	{@render player()}
-	<!-- {@render countdown()} -->
-	{@render countdownFlick()}
+	{#if bezier}
+		{@render countdownFlick()}
+	{:else}
+		{@render countdown()}
+	{/if}
 	{@render timeit()}
 
 </div>
