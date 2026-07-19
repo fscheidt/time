@@ -47,14 +47,14 @@ onMount(() => {
 })
 </script>
 
-<div class={cn("container", className)} 
+<div id="container" 
+  class={cn("flex", className)} 
   style="background-color: {colors[currentColorIndex]}">
   {@render children?.()}
 </div>
 
 <style>
-.container {
-  display: flex;
+#container {
   transition: background-color 1.0s 
   cubic-bezier(0.1, 0.1, 0.5, 5);
 }

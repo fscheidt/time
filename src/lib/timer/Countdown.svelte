@@ -154,32 +154,29 @@ onMount(() => {
 {/snippet}
 
 {#snippet countdown()}
-	<div class="flex flex-col w-60 gap-4">
-		<TimeBox
-			class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
-			fmt="HH:mm:ss"
-			bind:date={currentTime}
-		/>
-		<Progress 
-			class="h-2 rounded"
-			value={countSecs} 
-			max={totalSecs} />
+	<TimeBox
+		class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
+		fmt="HH:mm:ss"
+		bind:date={currentTime}
+	/>
+	<Progress 
+		class="h-2 rounded"
+		value={countSecs} 
+		max={totalSecs} />
+{/snippet}
+
+{#snippet countdownNormal()}
+	<div class="flex flex-col w-fit p-4 border-2 rounded-lg">
+		{@render countdown()}
 	</div>
 {/snippet}
 
-{#snippet countdownFlick()}
-	<Transition class="p-4 w-fit" bind:isRunning>
-		<div class="flex flex-col w-60 gap-4">
-			<TimeBox
-				class="text-accent text-xl dark:text-[oklch(55.4_0.20816_180.433)]"
-				fmt="HH:mm:ss"
-				bind:date={currentTime}
-			/>
-			<Progress 
-				class="h-2 rounded"
-				value={countSecs} 
-				max={totalSecs} />
-		</div>
+{#snippet countdownBezier()}
+	<Transition 
+		class="flex flex-col w-fit p-4 border-2 rounded-lg"
+		bind:isRunning
+		>
+		{@render countdown()}
 	</Transition>
 {/snippet}
 
@@ -211,9 +208,9 @@ onMount(() => {
 	{@render timeset()}
 	{@render player()}
 	{#if bezier}
-		{@render countdownFlick()}
+		{@render countdownBezier()}
 	{:else}
-		{@render countdown()}
+		{@render countdownNormal()}
 	{/if}
 	{@render timeit()}
 
